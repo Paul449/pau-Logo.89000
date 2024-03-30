@@ -38,7 +38,7 @@ const questions = [
     },
     {
         type:'input',
-        name:'shape-color',
+        name:'shapeColor',
         message: 'What color would you like for your shape background?:'
     }
 
