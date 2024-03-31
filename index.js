@@ -1,6 +1,8 @@
 const { name } = require('ci-info');
 const {readFile, writeFile} = require('fs/promises');
 const inquirer = require('inquirer');
+const shape = require('./lib/shape');
+const { data } = require('browserslist');
 
 /*
 GIVEN a command-line application that accepts user input
@@ -44,7 +46,11 @@ const questions = [
 
 ]
 
-inquirer.prompt(questions)
-.then((answers)=>{
-    console.log(answers)
+const writeFile = function (){
+writeFile(shape,data,(error)=>{
+    console.log(error)
 })
+}
+const init = function(){
+    
+}
