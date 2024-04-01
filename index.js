@@ -3,6 +3,7 @@ const {readFile, writeFile} = require('fs/promises');
 const inquirer = require('inquirer');
 const shape = require('./lib/shape');
 const { data } = require('browserslist');
+const { choices } = require('yargs');
 
 /*
 GIVEN a command-line application that accepts user input
@@ -36,21 +37,15 @@ const questions = [
         type:'list',
         name:'shape',
         choices:["circle","triangle","square"],
-        message: 'What shape would you like for your logo?(only circle, triangle, and square):'
-    },
-    {
-        type:'input',
-        name:'shapeColor',
-        message: 'What color would you like for your shape background?:'
-    }
-
+        message: 'What shape would you like for your logo?(only circle, triangle, and square):',
+        
+    }       
 ]
 
-const writeFile = function (){
-writeFile(shape,data,(error)=>{
-    console.log(error)
+inquirer.prompt(questions)
+.then(answer =>{
+    console.log(answer)
 })
-}
-const init = function(){
-    
-}
+
+
+
