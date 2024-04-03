@@ -21,14 +21,6 @@ WHEN I open the `logo.svg` file in a browser
 THEN I am shown a 300x200 pixel image that matches the criteria I entered
 */
 const questions = [
-
-    {
-        type:'list',
-        name:'shape',
-        choices:["circle","triangle","square"],
-        message: 'What shape would you like for your logo?(only circle, triangle, and square):'
-        
-    },
     {
         type:'input',
         name:'text',
@@ -44,7 +36,14 @@ const questions = [
         type:'input',
         name:'shapeColor',
         message: 'What background-color would you like for your logo?'
-    }       
+    },   
+    {
+        type:'list',
+        name:'shape',
+        choices:["circle","triangle","square"],
+        message: 'What shape would you like for your logo?(only circle, triangle, and square):'
+        
+    }  
 ]
   
  function writingFile(filename,answer){
