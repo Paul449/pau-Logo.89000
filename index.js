@@ -1,10 +1,9 @@
-const { name } = require('ci-info');
-const {readFile, writeFile} = require('fs/promises');
-const inquirer = require('inquirer');
-const shape = require('./lib/shape');
-const { data } = require('browserslist');
-const { choices } = require('yargs');
 
+const inquirer = require('inquirer');
+const path = require('path');
+const createLogo = require('./lib/createLogo');
+const fs = require('fs');
+const { data } = require('browserslist');
 /*
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for text
@@ -24,28 +23,42 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 const questions = [
 
     {
+        type:'list',
+        name:'shape',
+        choices:["circle","triangle","square"],
+        message: 'What shape would you like for your logo?(only circle, triangle, and square):'
+        
+    },
+    {
         type:'input',
-        name:'name',
+        name:'text',
         message:'What name would you like for your logo (up to three characters):'
     },
     {
         type:'input',
-        name:'text-color',
+        name:'textColor',
         message: 'What color would you like for your logo name?:'
     },
     {
-        type:'list',
-        name:'shape',
-        choices:["circle","triangle","square"],
-        message: 'What shape would you like for your logo?(only circle, triangle, and square):',
-        
+
+        type:'input',
+        name:'shapeColor',
+        message: 'What background-color would you like for your logo?'
     }       
 ]
-
-inquirer.prompt(questions)
-.then(answer =>{
-    console.log(answer)
-})
-
-
-
+  
+ function writingFile(filename,answer){
+    let data = createLogo(answer)
+   return fs.writeFileSync(path.join(process.cwd(),filename),data);
+ }
+// function which will generate the logo using the inquirer prompt with
+ const GenerateFile = function(){
+  inquirer.prompt(questions)
+  .then((answer) =>{
+    return writingFile('./generateLogo.svg',answer)
+  }).catch((error)=>{
+   console.error('An error has occured:', error);
+  })
+ }
+ GenerateFile();
+  
